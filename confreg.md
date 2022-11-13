@@ -5,7 +5,7 @@
 | 00H | Read / Write | ADDH | ADDH (default 0) ||||| The high byte and low byte of the module address. Note: When the module address is equal to FFFF, it can be used as the broadcast and listening address, and the module will no longer perform address filtering. |
 | 01H | Read / Write | ADDL ADDL (default 0) ||||| ^ |
 | 02H | Read / Write | NETID | NETID (default 0) ||||| Network address, used to distinguish the network, when communicating with each other, it should be set to the same |
-| 03H | Read / Write | REG0 | 7 | 6 | 5 | UART Serial rate (bps) | For the two modules that communicate with each other, the serial port baud rate can be different, and the verification method can also be different; when transmitting large data packets continuously, the user needs to consider the data blockage caused by the same baud rate, and may even be lost; it is generally recommended to communicate Both sides have the same baud rate |
+|: 03H :|: Read / Write :|: REG0 :| 7 | 6 | 5 | UART Serial rate (bps) | For the two modules that communicate with each other, the serial port baud rate can be different, and the verification method can also be different; when transmitting large data packets continuously, the user needs to consider the data blockage caused by the same baud rate, and may even be lost; it is generally recommended to communicate Both sides have the same baud rate |
 | ^^ | ^^ | ^^ | 0 | 0 | 0 | Baud Rate 1200 | ^^ |
 | ^ | ^ | ^ | 0 | 0 | 1 | Baud Rate 2400 | ^ |
 | ^ | ^ | ^ | 0 | 1 | 0 | Baud Rate 4800 | ^ | 
