@@ -5,21 +5,21 @@
 | 00H | Read / Write | ADDH | ADDH (default 0) ||||| The high byte and low byte of the module address. Note: When the module address is equal to FFFF, it can be used as the broadcast and listening address, and the module will no longer perform address filtering. |
 | 01H | Read / Write | ADDL ADDL (default 0) ||||| ^ |
 | 02H | Read / Write | NETID | NETID (default 0) ||||| Network address, used to distinguish the network, when communicating with each other, it should be set to the same |
-|: 03H :|: Read / Write :|: REG0 :| 7 | 6 | 5 | UART Serial rate (bps) | For the two modules that communicate with each other, the serial port baud rate can be different, and the verification method can also be different; when transmitting large data packets continuously, the user needs to consider the data blockage caused by the same baud rate, and may even be lost; it is generally recommended to communicate Both sides have the same baud rate |
-| ^^ | ^^ | ^^ | 0 | 0 | 0 | Baud Rate 1200 | ^^ |
-| ^ | ^ | ^ | 0 | 0 | 1 | Baud Rate 2400 | ^ |
-| ^ | ^ | ^ | 0 | 1 | 0 | Baud Rate 4800 | ^ | 
-| ^ | ^ | ^ | 0 | 1 | 1 | Baud Rate 9600 (default) | ^ |
-| ^ | ^ | ^ | 1 | 0 | 0 | Baud Rate 19200 | ^ |
-| ^ | ^ | ^ | 1 | 0 | 1 | Baud Rate 38400 | ^ |
-| ^ | ^ | ^ | 1 | 1 | 0 | Baud Rate 57600 | ^ |
-| ^ | ^ | ^ | 1 | 1 | 1 | Baud Rate 115200 | ^ |
-| ^ | ^ | ^ || 4 | 3 | Port Mode | The serial port mode of both sides of the communication can be different |
-| ^ | ^ | ^ || 0 | 0 | 8N1 | ^ |
-| ^ | ^ | ^ || 0 | 1 | 8O1 | ^ |
-| ^ | ^ | ^ || 1 | 0 | 8E1 | ^ |
-| ^ | ^ | ^ || 1 | 1 | 8N1 00 | ^ |
-| ^ | ^ | ^ | 2 | 1 | 0 | Wireless AirRate (bps) | The air rate of both parties must be the same; the higher the air rate, the smaller the delay and the shorter the transmission distance |
+| 03H | Read / Write | REG0 | 7 | 6 | 5 | UART Serial rate (bps) | For the two modules that communicate with each other, the serial port baud rate can be different, and the verification method can also be different; when transmitting large data packets continuously, the user needs to consider the data blockage caused by the same baud rate, and may even be lost; it is generally recommended to communicate Both sides have the same baud rate |
+|  |  |  | 0 | 0 | 0 | Baud Rate 1200 |  |
+|  |  |  | 0 | 0 | 1 | Baud Rate 2400 |  |
+|  |  |  | 0 | 1 | 0 | Baud Rate 4800 |  | 
+|  |  |  | 0 | 1 | 1 | Baud Rate 9600 (default) |  |
+|  |  |  | 1 | 0 | 0 | Baud Rate 19200 |  |
+|  |  |  | 1 | 0 | 1 | Baud Rate 38400 |  |
+|  |  |  | 1 | 1 | 0 | Baud Rate 57600 |  |
+|  |  |  | 1 | 1 | 1 | Baud Rate 115200 |  |
+|  |  |  || 4 | 3 | Port Mode | The serial port mode of both sides of the communication can be different |
+|  |  |  || 0 | 0 | 8N1 |  |
+|  |  |  || 0 | 1 | 8O1 |  |
+|  |  |  || 1 | 0 | 8E1 |  |
+|  |  |  || 1 | 1 | 8N1 00 |  |
+|  |  |  | 2 | 1 | 0 | Wireless AirRate (bps) | The air rate of both parties must be the same; the higher the air rate, the smaller the delay and the shorter the transmission distance |
 | ^ | ^ | ^ | 0 | 0 | 0 | 0.3 | ^ |
 | ^ | ^ | ^ | 0 | 0 | 1 | 1.2 | ^ |
 | ^ | ^ | ^ | 0 | 1 | 0 | 2.4 (default) | ^ |
