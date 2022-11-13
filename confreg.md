@@ -1,6 +1,7 @@
 # Configuration Registers
 
-| Register Address | Read/Write | Name | Describe ||||| Comments |
+| Register Address | Read/Write | Name | Describe | x | x | x | x | Comments |
+| ---------------- | ---------- | ---- | -------- | - | - | - | - | -------- |
 | 00H | Read / Write | ADDH | ADDH (default 0) ||||| The high byte and low byte of the module address. Note: When the module address is equal to FFFF, it can be used as the broadcast and listening address, and the module will no longer perform address filtering. |
 | 01H | Read / Write | ADDL ADDL (default 0) ||||| ^ |
 | 02H | Read / Write | NETID | NETID (default 0) ||||| Network address, used to distinguish the network, when communicating with each other, it should be set to the same |
