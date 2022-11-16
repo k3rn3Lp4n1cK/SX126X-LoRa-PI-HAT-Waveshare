@@ -120,81 +120,125 @@ class sx1262():
 
     def set_radio_confreg(self):
         # 00H High Address
-        x00h = input("Address High Byte (0x00): ")
-        if x00h == None: self.x00h = hex(0b00000000)
+        x00h = int(input("Address High Byte - default 0x00 (0-255): "))
+        if x00h == None: x00h = hex(0b00000000)
         
         # 01H Low Address
-        x01h = input("Address Low Byte (0x00): ")
-        if x01h == None: self.x01h = hex(0b00000000)
+        x01h = int(input("Address Low Byte - default 0x00 (0-255): "))
+        if x01h == None: x01h = hex(0b00000000)
         
         # 02H NETID
-        x02h = input("Network ID (0x00): ")
-        if x02h == None: self.x02h = hex(0b00000000)
+        x02h = int(input("Network ID - default 0x00 (0-255): "))
+        if x02h == None: x02h = hex(0b00000000)
         
         # 03H Baudrate
         print("Baudrate (9600)")
-        for k in BaudRate.keys(): print(k, '--', BaudRate[k])
-        try: x03h_baudrate = int(input("Enter Selection Number: "))
-        except: print("[-] Error: Please enter a number")
-
+        for k in BaudRate.keys(): print(BaudRate[k])
+        x03h_baudrate = input("Enter BaudRate - default 9600: ")
+        if x03h_baudrate == None: x03h_baudrate = '9600'
+        
         # 03H Portmode
         print("PortMode (240)")
-        for k in PortMode.keys(): print(k, '--', PortMode[k])
-        try: x03h_portmode = int(input("Enter Selection Number: "))
-        except: print("[-] Error: Please enter a number")
-
+        for k in PortMode.keys(): print(PortMode[k])
+        x03h_portmode = input("Enter PortMode - default 8N1: ")
+        if x03h_portmode == None: x03h_portmode = '8N1'
+        
         # 03H Air Rate
         print("Air Rate (2.4)")
-        for k in AirRate.keys(): print(k, '--', AirRate[k])
-        try: x03h_airrate = int(input("Enter Selection Number: "))
-        except: print("[-] Error: Please enter a number")
+        for k in AirRate.keys(): print(AirRate[k])
+        x03h_airrate = input("Enter Selection Number: ")
+        if x03h_airrate == None: x03h_airrate = '2.4'
 
         # 04H Packet Size
         print("Packet Size (240): ")
-        for k in PacketSize.keys(): print(k, '--', PacketSize[k])
+        for k in PacketSize.keys(): print(PacketSize[k])
+        x04h_packetsize = input("Enter Packet Size - default 240: ")
+        if x04h_packetsize == None: x04h_packetsize = '240'
 
         # 04H Channel Noise
         print("Channel Noise (disabled)")
-        for k in ChannelNoise.keys(): print(k, '--', ChannelNoise[k])
+        for k in ChannelNoise.keys(): print(ChannelNoise[k])
+        x04h_channelnoise = input("Enter Channel Noise state - default disabled: ")
+        if x04h_channelnoise == None: x04h_channelnoise = 'disabled'
 
         # 04H Transmit Power
         print("Transmit Power (22)")
-        for k in TxPower.keys(): print(k, '--', TxPower[k])
+        for k in TxPower.keys(): print(TxPower[k])
+        x04h_txpower = input("Enter Transmit Power - default 22: ")
+        if x04h_txpower == None: x04h_txpower = '22'
 
         # 05H Control Channel
         print("Control Channel (18): ")
+        x05h = input("Enter Control Channel - default 18: ")
+        if x05h == None: x05h = '18'
 
         # 06H RSSI level
         print("RSSI Level")
-        for k in RSSILevel.keys(): print(k, '--', RSSILevel[k])
+        for k in RSSILevel.keys(): print(RSSILevel[k])
+        x06h_rssi = input("Enter RSSI Level Feedback - default disabled: ")
+        if x06h_rssi == None: x06h_rssi = 'disabled'
 
         # 06H Transfer Mode
         print("Transfer Mode")
-        for k in TransferMode.keys(): print(k, '--', TransferMode[k])
+        for k in TransferMode.keys(): print(TransferMode[k])
+        x06h_transfermode = input("Enter Transfer Mode - default transparent: ")
+        if x06h_transfermode == None: x06h_transfermode = 'transparent'
 
         # 06H Relay Mode
         print("Relay Mode")
-        for k in RelayMode.keys(): print(k, '--', RelayMode[k])
+        for k in RelayMode.keys(): print(RelayMode[k])
+        x06h_relaymode = input("Enter Relay Mode - defualt disabled: ")
+        if x06h_relaymode == None: x06h_relaymode = 'disabled'
 
         # 06H LBT
         print("LBT")
-        for k in Lbt.keys(): print(k, '--', Lbt[k])
+        for k in Lbt.keys(): print(Lbt[k])
+        x06h_lbt = input("Enter LBT Mode - default disabled: ")
+        if x06h_lbt == None: x06h_lbt = 'disabled'
 
         # 06H WOR Mode
         print("WOR Mode")
-        for k in WORMode.keys(): print(k, '--', WORMode[k])
+        for k in WORMode.keys(): print(WORMode[k])
+        x06h_wormode = input("Enter WOR Mode - default transmitter: ")
+        if x06h_wormode == None: x06h_wormode = 'transmitter'
 
         # 06H WOR Cycle
         print("WOR Cycle")
-        for k in WORCycle.keys(): print(k, '--', WORCycle[k])
+        for k in WORCycle.keys(): print(WORCycle[k])
+        x06h_worcycle = input("Enter WOR Cycle - default 500: ")
+        if x06h_worcycle == None: x06h_worcycle = '500'
 
         # 07H Key High
         print("Crypto Key High")
+        x07h = input("Enter Crypto Key High - default 0: ")
+        if x07h == None: x07h = '0'
 
         # 08H Key Low
         print("Crypto Key Low")
+        x08h = input("Enter Crypto Key Low - default 0: ")
+        if x08h == None: x08h = '0'
 
-
+        # 00H High Address
+        self.x00h = hex(x00h)
+        # 01H Low Address
+        self.x01h = hex(x01h)
+        # 02H Network Address
+        self.x02h = hex(x02h)
+        # 03H 
+        self.x03h = hex(BaudRate[x03h_baudrate] + PortMode[x03h_portmode] + AirRate[x03h_airrate])
+        # 04H
+        self.x04h = hex(PacketSize[x04h_packetsize] + ChannelNoise[x04h_channelnoise] + TxPower[x04h_txpower])
+        # 05H Control Channel
+        self.x05h = hex(x05h)
+        # 06H
+        self.x06h = hex(RSSILevel[x06h_rssi] + TransferMode[x06h_transfermode] + RelayMode[x06h_relaymode] \
+                        + Lbt[x06h_lbt] + WORMode[x06h_wormode] + WORCycle[x06h_worcycle])
+        # 07H - KeyHigh
+        self.x07h = hex(x07h)
+        # 08H - KeyLow
+        self.x08h = hex(x08h)
+        
+        
     def get_radio_confreg(self):
         # Return a Dictionary with all the confreg settings 
 
@@ -273,7 +317,7 @@ class sx1262():
             self.x08h = hex(split[11])
             self.sync = True
         except Exception as e:
-            print("[*] get_confreg Error: ", e)
+            print("[*] download_radio_confreg Error: ", e)
             self.sync = False
         finally:
             ser.close()
@@ -285,4 +329,24 @@ class sx1262():
         # \xc0 - command header byte
         # \x00 - initial address byte
         # \x09 - length byte
-        setcmd = b'\xc1\x00\x09'
+        cmd = bytearray(b'\xc1\x00\x09')
+        cmd.append(int(self.x00h, 16))
+        cmd.append(int(self.x01h, 16))
+        cmd.append(int(self.x02h, 16))
+        cmd.append(int(self.x03h, 16))
+        cmd.append(int(self.x04h, 16))
+        cmd.append(int(self.x05h, 16))
+        cmd.append(int(self.x06h, 16))
+        cmd.append(int(self.x07h, 16))
+        cmd.append(int(self.x08h, 16))
+        print("[+] Sending new Configuration Register")
+        print(cmd)
+        print(' '.join(['{:02X}'.format(x) for x in cmd]))
+        #try:
+        #    ser.write(bytes(cmd))
+        #    ret = ser.read_until()
+        #    print(ret)
+        #except Exception as e:
+        #    print("[*] upload_radio_confreg Error: ", e)
+        #finally:
+        #    ser.close()

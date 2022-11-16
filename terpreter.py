@@ -59,9 +59,9 @@ class terpreter(object):
             else:
                 ser = self.init_serial(self.radio.commport, self.radio.baudrate)
                 self.radio.upload_radio_confreg(ser)
-                print("[+] Downloading new confreg from radio")
-                self.radio.download_radio_confreg(ser)
-                self.pp.pprint(self.radio.get_radio_confreg())
+                #print("[+] Downloading new confreg from radio")
+                #self.radio.download_radio_confreg(ser)
+                #self.pp.pprint(self.radio.get_radio_confreg())
 
         elif 'set comm port' in text:
             self.radio.commport = text.rsplit(' ', 1)[1]
