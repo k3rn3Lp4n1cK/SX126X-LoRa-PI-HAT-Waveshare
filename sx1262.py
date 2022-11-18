@@ -126,14 +126,24 @@ class sx1262():
 
     def send_message(self, ser, msg):
         try:
-            msgb = bytes([255, 255]) + msg.encode()
-            print(msgb)
-            ser.write(msgb)
-            time.sleep(.5)
+            #msgb = bytes([255, 255]) + msg.encode()
+            #print(msgb)
+            b = bytes(msg, 'utf-8')
+            ser.write(b)
+            time.sleep(.2)
             ret = ser.read_until()
             print("[+] Return value: ", ret)
         except Exception as e:
             print("[*] send_message Error: ", e)
+        finally:
+            ser.close()
+
+    def rcv_message(self, ser):
+        try:
+            data = ser.readline()
+            print(data.decode("utf-8"))
+        except Exception as e:
+            print("[*] rcv_message Error: ", e)
         finally:
             ser.close()
 

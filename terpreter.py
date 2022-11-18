@@ -40,9 +40,14 @@ class terpreter(object):
         print("[+] Setting GPIO Pins")
         time.sleep(.5)
         
-    def init_serial(self, comPort, baudrate):
+    def init_serial(self, comPort, br, to=1):
         try:
-            return serial.Serial(comPort, baudrate, timeout=2)
+            return serial.Serial(port=comPort, \
+                    baudrate=br, \
+                    timeout=to, \
+                    parity=serial.PARITY_NONE, \
+                    stopbits=serial.STOPBITS_ONE, \
+                    bytesize=serial.EIGHTBITS)
         except Exception as e: raise e
             
 
@@ -233,8 +238,12 @@ class terpreter(object):
             ser = self.init_serial(self.radio.commport, self.radio.baudrate)
             msg = input("Enter Message to send (test1234): ") or "test1234"
             self.radio.send_message(ser, msg)
-            self.gpio_mode('')
 
+        elif 'receive message' in text:
+            self.gpio_mode('')
+            ser = self.init_serial(self.radio.commport, self.radio.baudrate, to=30)
+            self.radio.rcv_message(ser)
+            
         elif 'set comm port' in text:
             self.radio.commport = text.rsplit(' ', 1)[1]
             print("[+] Setting comm port to: ", self.radio.commport)
