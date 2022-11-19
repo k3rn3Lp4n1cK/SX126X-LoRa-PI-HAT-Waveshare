@@ -262,6 +262,10 @@ class terpreter(object):
             self.radio.baudrate = text.rsplit(' ', 1)[1]
             print("[+] Setting baud rate to: ", self.radio.baudrate)
 
+        elif 'show comm settings' in text:
+            print("[+] Serial Comm Port Settings")
+            print("  ", self.radio.commport)
+            print("  ", self.radio.baudrate)
         elif 'exit' in text:
             exit(0)
 
