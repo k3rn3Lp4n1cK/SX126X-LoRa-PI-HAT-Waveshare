@@ -205,29 +205,28 @@ class terpreter(object):
             print("2. Remove the M0 and M1 Jumpers")
             print("3. Set Jumpers to B")
             print("")
-            print("=========== COMMANDS ===========")
             print("==== Configuration Register ====")
-            print("show radio confreg\t-- Displays Current Radio Configuration Register Settings")
-            print("download radio confreg\t-- Retrieves Radio Configuration Register Settings over serial")
-            print("upload radio confreg\t-- Sends Radio Configuration Register Settings over serial")
+            print("show confreg\t-- Displays Current Radio Configuration Register Settings")
+            print("download confreg\t-- Retrieves Radio Configuration Register Settings over serial")
+            print("upload confreg\t-- Sends Radio Configuration Register Settings over serial")
             print("")
             print("====     Communications     ====")
-            print("send message\t-- Send a test message")
-            print("receive message\t-- Receive a test message")
+            print("send msg\t-- Send a test message")
+            print("rcv msg\t-- Receive a test message")
             print("chat\t\t-- Enter Chat Mode")
             print("perf test\t-- Enter Performance Testing Mode")
             print("")
             print("====  Serial Port Setting   ====")
-            print("set comm port <X>\t-- Set the Serial Port (default /dev/ttyS0")
+            print("set comm port <X>\t-- Set the Serial Port (default /dev/ttyS0)")
             print("set baud rate <X>\t-- Set the Serial Port Speed (default 9600)")
             print("================================")
             print("exit")
 
-        elif text == 'show radio confreg':
+        elif text == 'show confreg':
             print("[+] Current Settings")
             self.pp.pprint(self.radio.show_radio_confreg())
 
-        elif text == 'download radio confreg':
+        elif text == 'download confreg':
             self.gpio_mode('conf')
             print("[+] Receiving confreg from COM Port: ", self.radio.commport)
             ser = self.init_serial(self.radio.commport, self.radio.baudrate)
@@ -235,21 +234,22 @@ class terpreter(object):
             self.pp.pprint(self.radio.show_radio_confreg())
             self.gpio_mode('')
         
-        elif text == 'upload radio confreg':
+        elif text == 'upload confreg':
             self.gpio_mode('conf')
             ser = self.init_serial(self.radio.commport, self.radio.baudrate)
             self.set_confreg(ser)
             self.gpio_mode('')
         
-        elif 'send message' in text:
+        elif 'send msg' in text:
             self.gpio_mode('')
             ser = self.init_serial(self.radio.commport, self.radio.baudrate)
             msg = input("Enter Message to send (test1234): ") or "test1234\n"
             self.radio.send_message(ser, msg + '\n')
 
-        elif 'receive message' in text:
+        elif 'rcv msg' in text:
             self.gpio_mode('')
             ser = self.init_serial(self.radio.commport, self.radio.baudrate, to=30)
+            print("[+] Receiver will timeout in 30 secs if no data is received")
             self.radio.rcv_message(ser)
             
         elif 'set comm port' in text:
@@ -263,6 +263,9 @@ class terpreter(object):
 
         elif 'exit' in text:
             exit(0)
+
+        else:
+            print("[*] Command not recognized")
 
     def expr(self):
         self.current_token = self.get_next_token()

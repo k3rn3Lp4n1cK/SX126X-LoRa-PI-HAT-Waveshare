@@ -130,7 +130,6 @@ class sx1262():
             ser.write(b)
             time.sleep(.2)
             ret = ser.readlines()
-            print("[+] Return value: ", ret)
         except Exception as e:
             print("[*] send_message Error: ", e)
         finally:
