@@ -206,13 +206,13 @@ class terpreter(object):
             print("3. Set Jumpers to B")
             print("")
             print("==== Configuration Register ====")
-            print("show confreg\t-- Displays Current Radio Configuration Register Settings")
+            print("show confreg\t\t-- Displays Current Radio Configuration Register Settings")
             print("download confreg\t-- Retrieves Radio Configuration Register Settings over serial")
-            print("upload confreg\t-- Sends Radio Configuration Register Settings over serial")
+            print("upload confreg\t\t-- Sends Radio Configuration Register Settings over serial")
             print("")
             print("====     Communications     ====")
             print("send msg\t-- Send a test message")
-            print("rcv msg\t-- Receive a test message")
+            print("rcv msg\t\t-- Receive a test message")
             print("chat\t\t-- Enter Chat Mode")
             print("perf test\t-- Enter Performance Testing Mode")
             print("")
@@ -224,7 +224,8 @@ class terpreter(object):
 
         elif text == 'show confreg':
             print("[+] Current Settings")
-            self.pp.pprint(self.radio.show_radio_confreg())
+            ret = self.radio.show_radio_confreg()
+            if ret: self.pp.pprint(ret)
 
         elif text == 'download confreg':
             self.gpio_mode('conf')
@@ -258,7 +259,7 @@ class terpreter(object):
 
         # TODO: Baudrate stuff
         elif 'set baud rate' in text:
-            self.radio.baudrate = test.rsplit(' ', 1)[1]
+            self.radio.baudrate = text.rsplit(' ', 1)[1]
             print("[+] Setting baud rate to: ", self.radio.baudrate)
 
         elif 'exit' in text:
