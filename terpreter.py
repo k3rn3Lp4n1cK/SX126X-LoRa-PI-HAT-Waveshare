@@ -22,6 +22,7 @@ class terpreter(object):
         self.M0 = 22
         self.M1 = 27
         GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         GPIO.setup(self.M0, GPIO.OUT)
         GPIO.setup(self.M1, GPIO.OUT)
         GPIO.output(self.M0, False)
@@ -205,13 +206,20 @@ class terpreter(object):
             print("3. Set Jumpers to B")
             print("")
             print("=========== COMMANDS ===========")
-            print("================================")
-            print("show radio confreg\tDisplays Current Radio Configuration Register Settings")
-            print("download radio confreg\t\tRetrieves Radio Configuration Register Settings over serial")
-            print("upload radio confreg\t\tSends Radio Configuration Register Settings over serial")
-            print("================================")
-            print("set comm port <comm_port>\tSet the Serial Port (default /dev/ttyS0")
-            print("set baud rate <speed>\tSet the Serial Port Speed (default 9600)")
+            print("==== Configuration Register ====")
+            print("show radio confreg\t-- Displays Current Radio Configuration Register Settings")
+            print("download radio confreg\t-- Retrieves Radio Configuration Register Settings over serial")
+            print("upload radio confreg\t-- Sends Radio Configuration Register Settings over serial")
+            print("")
+            print("====     Communications     ====")
+            print("send message\t-- Send a test message")
+            print("receive message\t-- Receive a test message")
+            print("chat\t\t-- Enter Chat Mode")
+            print("perf test\t-- Enter Performance Testing Mode")
+            print("")
+            print("====  Serial Port Setting   ====")
+            print("set comm port <X>\t-- Set the Serial Port (default /dev/ttyS0")
+            print("set baud rate <X>\t-- Set the Serial Port Speed (default 9600)")
             print("================================")
             print("exit")
 
@@ -236,8 +244,8 @@ class terpreter(object):
         elif 'send message' in text:
             self.gpio_mode('')
             ser = self.init_serial(self.radio.commport, self.radio.baudrate)
-            msg = input("Enter Message to send (test1234): ") or "test1234"
-            self.radio.send_message(ser, msg)
+            msg = input("Enter Message to send (test1234): ") or "test1234\n"
+            self.radio.send_message(ser, msg + '\n')
 
         elif 'receive message' in text:
             self.gpio_mode('')
